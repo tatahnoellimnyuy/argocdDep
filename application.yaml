@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: firsapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tatahnoellimnyuy/argocdDep.git
+    targetRevision: HEAD
+    path: config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: firstapp
+  SyncPolicy:
+    SyncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
